@@ -1,10 +1,6 @@
 
 #include "DialogLayer.h"
 
-DialogLayer::DialogLayer(){};
-
-DialogLayer::~DialogLayer(){};
-
 bool DialogLayer::init()
 {
     bool bRet = false;    
@@ -20,15 +16,17 @@ void DialogLayer::initDialog()
 {
     Size winSize = Director::getInstance()->getVisibleSize();
     
-    auto *label = Label::createWithSystemFont("Are u sure exit?", "", 12);
-    label->setPosition(Vec2(winSize.width / 2, winSize.height / 2 + 50));
+    auto *label = Label::createWithSystemFont("quit", "", 20);
+    label->setPosition(Vec2(winSize.width / 2, winSize.height - 50));
     this->addChild(label);
     
-    auto *okMenuItem = MenuItemFont::create("OK", CC_CALLBACK_1(DialogLayer::okMenuItemCallback,this));
-    okMenuItem->setPosition(Vec2(winSize.width / 2 - 100, winSize.height / 2 - 50));
+    auto *okMenuItem = MenuItemFont::create("ok", CC_CALLBACK_1(DialogLayer::okMenuItemCallback,this));
+	okMenuItem->setFontSize(14);
+    okMenuItem->setPosition(Vec2(winSize.width / 2 - 100, winSize.height - 100));
     
-    auto *cancelMenuItem = MenuItemFont::create("Cancel", CC_CALLBACK_1(DialogLayer::cancelMenuItemCallback,this));
-    cancelMenuItem->setPosition(Vec2(winSize.width / 2 + 100, winSize.height / 2 - 50));
+    auto *cancelMenuItem = MenuItemFont::create("cancel", CC_CALLBACK_1(DialogLayer::cancelMenuItemCallback,this));
+	cancelMenuItem->setFontSize(14);
+    cancelMenuItem->setPosition(Vec2(winSize.width / 2 + 100, winSize.height - 100));
     
     m_pMenu = Menu::create(okMenuItem, cancelMenuItem, NULL);
     m_pMenu->setPosition(Point::ZERO);

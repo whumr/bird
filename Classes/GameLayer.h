@@ -171,6 +171,8 @@ private:
 
     GameStatus gameStatus;
 
+	DialogLayer *dialogLayer;
+
     int score;
 
     BirdSprite *bird;

@@ -68,7 +68,8 @@ bool GameLayer::init(){
 		auto contactListener = EventListenerPhysicsContact::create();
 		contactListener->onContactBegin = CC_CALLBACK_1(GameLayer::onContactBegin, this);
 		this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
-		
+		this->dialogLayer = nullptr;
+
 		return true;
 	}else {
 		return false;
@@ -116,18 +117,16 @@ void GameLayer::onTouch() {
 }
 
 void GameLayer::onBack() {	
-	Director::getInstance()->pause();
-	auto dialogLayer = DialogLayer::create();
-	if(dialogLayer) {
-		this->addChild(dialogLayer);
-	}
-
-    /*this->addChild(dialogLayer);
-	if (Director::getInstance()->isPaused()) {
-		Director::getInstance()->resume();
-	} else {
-		Director::getInstance()->pause();
-	}*/
+	Director::getInstance()->end();
+	//Director::getInstance()->pause();
+	//if(this->dialogLayer) {
+	//	this->removeChild(this->dialogLayer);
+	//	this->dialogLayer = NULL;
+	//}
+	//if(!this->dialogLayer) 
+	//	this->dialogLayer = DialogLayer::create();			
+	//this->addChild(this->dialogLayer);
+	//this->dialogLayer->setGlobalZOrder(100);
 }
 
 void GameLayer::rotateBird() {

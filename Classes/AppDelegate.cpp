@@ -18,8 +18,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLView::create("My Game");
         director->setOpenGLView(glview);
     }
-	glview->setFrameSize(640,960);
-	glview->setFrameZoomFactor(0.7f);
+	/*glview->setFrameSize(640,960);
+	glview->setFrameZoomFactor(0.7f);*/
 	glview->setDesignResolutionSize(288,512, ResolutionPolicy::SHOW_ALL);
 
 	this->setResourceSearchResolution();

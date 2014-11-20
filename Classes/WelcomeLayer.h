@@ -31,6 +31,8 @@ private:
      * This method is make the land have a scroll animation
      */
 	void scrollLand(float dt);
+	void showAds();
+	void onKeyReleased(EventKeyboard::KeyCode keycode, Event *event);
     
 	Sprite *land1;
 	Sprite *land2;

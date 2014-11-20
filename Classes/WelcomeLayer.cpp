@@ -1,5 +1,9 @@
 ﻿#include "WelcomeLayer.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)   
+#include "platform/android/jni/JniHelper.h"   
+#endif 
+
 WelcomeLayer::WelcomeLayer(){};
 
 WelcomeLayer::~WelcomeLayer(){};
@@ -69,7 +73,35 @@ bool WelcomeLayer::init(){
 	copyright->setPosition(Point(origin.x + visiableSize.width/2, origin.y + visiableSize.height/6));
 	this->addChild(copyright, 10);	
 
+	//按键事件
+	auto dispatcher = Director::getInstance()->getEventDispatcher();
+	auto listenerkeyPad = EventListenerKeyboard::create(); 
+	listenerkeyPad->onKeyReleased = CC_CALLBACK_2(WelcomeLayer::onKeyReleased, this); 
+    dispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this); 
+
+	//插入广告
+	this->showAds();
+
 	return true;
+}
+
+void WelcomeLayer::showAds() {
+	//判断当前是否为Android平台   
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)  
+		JniMethodInfo minfo;
+		bool isHave = JniHelper::getStaticMethodInfo(minfo, "org/cocos2dx/cpp/AppActivity", 
+			"getActivity", "()Ljava/lang/Object;");  
+		jobject activityObj;  
+		if (isHave)  
+		{  
+			activityObj = minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID);  
+		}  
+		isHave = JniHelper::getMethodInfo(minfo, "org/cocos2dx/cpp/AppActivity", "showAds", "()V");  
+		if (isHave)  
+		{  
+			minfo.env->CallVoidMethod(activityObj, minfo.methodID);  
+		}  
+	#endif   
 }
 
 void WelcomeLayer::scrollLand(float dt){
@@ -87,4 +119,21 @@ void WelcomeLayer::menuStartCallback(Ref *sender){
 	auto scene = GameScene::create();
 	TransitionScene *transition = TransitionFade::create(1, scene);
 	Director::getInstance()->replaceScene(transition);
+}
+
+void WelcomeLayer::onKeyReleased(EventKeyboard::KeyCode keycode, Event *event)
+{
+	//返回
+	if (keycode == EventKeyboard::KeyCode::KEY_BACK) {  
+		CCLOG("KEY_BACK onKeyReleased..");
+		Director::getInstance()->end();	
+	} else if (keycode == EventKeyboard::KeyCode::KEY_BACKSPACE) {
+		CCLOG("KEY_BACKSPACE onKeyReleased..");
+		Director::getInstance()->end();
+	} else if (keycode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+		CCLOG("KEY_BACKSPACE onKeyReleased..");
+		Director::getInstance()->end();
+	} else if (keycode == EventKeyboard::KeyCode::KEY_MENU) {
+		CCLOG("KEY_MENU onKeyReleased..");
+	} 
 }

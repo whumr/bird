@@ -1,3 +1,5 @@
+#ifndef  _DialogLayer_H_
+#define  _DialogLayer_H_
 
 #include "cocos2d.h"
 
@@ -11,9 +13,6 @@ class DialogLayer: public LayerColor
 	bool m_bTouchedMenu;
     
 public:
-    DialogLayer();
-    ~DialogLayer();
-    
     virtual bool init();
     // 初始化对话框内容
     void initDialog();
@@ -23,3 +22,5 @@ public:
 
 	CREATE_FUNC(DialogLayer);
 };
+
+#endif

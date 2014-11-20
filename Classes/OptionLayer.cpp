@@ -29,7 +29,7 @@ bool OptionLayer::init()
         dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 		//°´¼üÊÂ¼þ
 		auto listenerkeyPad = EventListenerKeyboard::create(); 
-		listenerkeyPad->onKeyPressed = CC_CALLBACK_2(OptionLayer::onKeyReleased, this); 
+		listenerkeyPad->onKeyReleased = CC_CALLBACK_2(OptionLayer::onKeyReleased, this); 
         dispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this); 
 		return true;
 	}else {
@@ -48,8 +48,13 @@ void OptionLayer::onKeyReleased(EventKeyboard::KeyCode keycode, Event *event)
 	if (keycode == EventKeyboard::KeyCode::KEY_BACK) {  
 		CCLOG("KEY_BACK onKeyReleased..");
 		this->delegator->onBack(); 	
-	//menu
+	} else if (keycode == EventKeyboard::KeyCode::KEY_BACKSPACE) {
+		CCLOG("KEY_BACKSPACE onKeyReleased..");
+		this->delegator->onBack(); 	
+	} else if (keycode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+		CCLOG("KEY_BACKSPACE onKeyReleased..");
+		this->delegator->onBack(); 	
 	} else if (keycode == EventKeyboard::KeyCode::KEY_MENU) {
-		MessageBox("menu pressed", "xx");
+		CCLOG("KEY_MENU onKeyReleased..");
 	} 
 }
