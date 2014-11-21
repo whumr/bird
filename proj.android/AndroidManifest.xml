@@ -18,6 +18,8 @@
 	<!-- 以下为可选权限 -->
 	<uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
 
     <application android:label="@string/app_name"
                  android:icon="@drawable/icon">
@@ -26,7 +28,7 @@
         <meta-data android:name="android.app.lib_name"
 	              android:value="cocos2dcpp" />
 
-        <activity android:name="org.cocos2dx.cpp.AppActivity"
+        <activity android:name="com.mr.bird.AppActivity"
                   android:label="@string/app_name"
                   android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"

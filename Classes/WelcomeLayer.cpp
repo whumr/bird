@@ -89,14 +89,14 @@ void WelcomeLayer::showAds() {
 	//判断当前是否为Android平台   
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)  
 		JniMethodInfo minfo;
-		bool isHave = JniHelper::getStaticMethodInfo(minfo, "org/cocos2dx/cpp/AppActivity", 
+		bool isHave = JniHelper::getStaticMethodInfo(minfo, "com/mr/bird/AppActivity", 
 			"getActivity", "()Ljava/lang/Object;");  
 		jobject activityObj;  
 		if (isHave)  
 		{  
 			activityObj = minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID);  
 		}  
-		isHave = JniHelper::getMethodInfo(minfo, "org/cocos2dx/cpp/AppActivity", "showAds", "()V");  
+		isHave = JniHelper::getMethodInfo(minfo, "com/mr/bird/AppActivity", "showAds", "()V");  
 		if (isHave)  
 		{  
 			minfo.env->CallVoidMethod(activityObj, minfo.methodID);  
