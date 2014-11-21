@@ -58,7 +58,7 @@
 		</receiver>
 		<provider
 		    android:name="net.youmi.android.spot.SpotAdContentProvider"
-		    android:authorities="org.cocos2dx.cpp"
+		    android:authorities="com.mr.bird"
 		    android:exported="false"/>
         
     </application>
